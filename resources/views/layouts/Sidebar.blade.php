@@ -157,6 +157,13 @@
                 @csrf
                 <button type="submit" class="btn btn-sidebar font-weight-bold">Sign out</button>
             </form>
+
+            <!-- OBE Sheet Button (Always Visible) -->
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-toggle="modal" data-target="#generateObeModal">
+                    <i class="fas fa-file-excel"></i> Generate OBE Sheet
+                </a>
+            </li>
         </div>
 
         <div class="main-content">

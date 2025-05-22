@@ -235,7 +235,7 @@
             color: #dee2e6;
         }
 
-        @media (max-width: 768px) {
+          @media (max-width: 768px) {
             .logo {
             max-width: 200px;
             border-radius: 30px;
@@ -294,11 +294,41 @@
             </div>
             @endif
 
-            <!-- Student Management Section -->
-            <button class="btn btn-sidebar font-weight-bold" data-toggle="collapse" style="color: white" data-target="#studentMenu">OBE Sheet</button>
-            <div id="studentMenu" class="collapse">
-                <a href="{{ route('add.QualityEnhancementCell') }}" class="d-block pl-4 py-1">Marks</a>
-               <a href="{{ route('QualityEnhancementCell.list') }}" class="d-block pl-4 py-1">Generate CRRC</a>
+            <!-- OBE Sheet Section -->
+            <button class="btn btn-sidebar font-weight-bold" data-toggle="collapse" style="color: white" data-target="#obeMenu">OBE Sheet</button>
+            <div id="obeMenu" class="collapse show">
+                <a href="#" class="d-block pl-4 py-1" data-toggle="modal" data-target="#generateObeModal">Generate OBE</a>
+            </div>
+
+            <!-- Modal for OBE Generation -->
+            <div class="modal fade" id="generateObeModal" tabindex="-1" role="dialog" aria-labelledby="generateObeModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="generateObeModalLabel">Generate OBE Sheet</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form method="GET" action="{{ route('obe.generate') }}">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="course_id">Select Course</label>
+                                    <select class="form-control" id="course_id" name="course_id" required>
+                                        <option value="">-- Select Course --</option>
+                                        @foreach($courses as $course)
+                                            <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Download OBE</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
 
             <form id="logout-form" action="{{ route('faculty.logout') }}" method="POST" style="display: none;">
@@ -321,7 +351,7 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                    </div>
+                </div>
                 @endif
 
                 <!-- Error Message -->
@@ -339,7 +369,7 @@
                     <h3 class="mb-0">Student Assessment Marks</h3>
                 </div>
 
-                @forelse($marksDetail as $index => $assessment)
+                    @forelse($marksDetail as $index => $assessment)
                     <div class="assessment-card">
                         <div class="assessment-header">
                             <h5 class="assessment-title">
@@ -347,7 +377,7 @@
                                 {{ $assessment->assessment_title ?? 'Untitled Assessment' }}
                                 <span class="badge badge-light ml-2">{{ $assessment->type }}</span>
                             </h5>
-                        </div>
+                            </div>
                         
                         <div class="assessment-content">
                             <table class="marks-table">
@@ -355,10 +385,10 @@
                                     <tr>
                                         <th>CLO</th>
                                         <th>Marks Obtained</th>
-                                        <th>Total Marks</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                            <th>Total Marks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                     @php 
                                         $totalMarks = 0;
                                         $obtainedMarks = 0;
@@ -373,10 +403,10 @@
                                             <td>{{ $mark->clo_number }}</td>
                                             <td class="total-marks">{{ $mark->obtained_marks }}</td>
                                             <td>{{ $mark->total_marks }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
 
                             <div class="marks-summary">
                                 <div class="summary-item">
@@ -393,17 +423,17 @@
                                         {{ $totalMarks > 0 ? round(($obtainedMarks / $totalMarks) * 100, 2) : 0 }}%
                                     </span>
                                 </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @empty
+                    @empty
                     <div class="no-marks">
                         <i class="fas fa-clipboard-list"></i>
                         <h4>No Assessment Marks Found</h4>
                         <p>No marks have been recorded for this student yet.</p>
                     </div>
-                @endforelse
-            </div>
+                    @endforelse
+                </div>
         </div>
         
 </div>

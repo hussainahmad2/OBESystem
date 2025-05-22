@@ -140,9 +140,19 @@ class FacultyDashboardController extends Controller
         $course->save();
         // Update intro/objectives (if editable via input field)
         if ($request->has('intro_objectives')) {
-            $course->course_detail->first()->update([
-                'intro_objectives' => $request->input('intro_objectives'),
-            ]);
+            $courseDetail = $course->course_detail->first();
+            if ($courseDetail) {
+                $courseDetail->update([
+                    'intro_objectives' => $request->input('intro_objectives'),
+                ]);
+            } else {
+                // Create if not exists
+                $course->course_detail()->create([
+                    'course_id' => $course->id,
+                    'title' => $request->input('title', $course->name), // fallback to course name if title not provided
+                    'intro_objectives' => $request->input('intro_objectives'),
+                ]);
+            }
         }
         // Update course outcomes
         if ($request->has('course_outcomes')) {

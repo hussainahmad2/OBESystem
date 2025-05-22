@@ -179,3 +179,7 @@ Route::delete('/courses/delete/{id}', [App\Http\Controllers\Faculty\CourseContro
 Route::get('/hod/cdf/download/{id}/{format}', [App\Http\Controllers\Hod\CourseExportController::class, 'download'])->name('hod.cdf.download');
 
 Route::delete('/course-allocation/delete/{id}', [App\Http\Controllers\Faculty\CourseAllocationController::class, 'destroy'])->name('delete.course_allocation');
+
+Route::get('/obe/generate', [App\Http\Controllers\ObeController::class, 'generate'])->name('obe.generate');
+
+Route::get('/lecturer/course/{course}/download-cdf', [CourseController::class, 'downloadCDF'])->name('lecturer.course.download-cdf');

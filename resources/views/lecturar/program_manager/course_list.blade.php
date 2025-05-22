@@ -144,7 +144,9 @@
                                         <td>${course.pre_req ? (response.find(c => c.id == course.pre_req)?.name || 'N/A') : 'N/A'}</td>
                                         <td>${course.Credit_Hours || 'N/A'}</td>
                                         <td>${course.Status || 'N/A'}</td>
-                                        <td><a href="${courseUrl}" class="btn btn-primary btn-sm">View Details</a></td>
+                                        <td>
+                                            <a href="${courseUrl}" class="btn btn-primary btn-sm">View Details</a>
+                                        </td>
                                         <td>
                                             <div class="action-buttons">
                                                 <a href="${editUrl}" class="btn btn-warning btn-sm">Edit</a>
@@ -203,6 +205,11 @@
         const courseDetailUrlTemplate = "{{ route('course_detail', ['id' => 'course_id']) }}";
         const editCourseUrlTemplate = "{{ route('editcourse', ['id' => 'course_id']) }}";
         const deleteCourseUrlTemplate = "{{ route('deletecourse', ['id' => 'course_id']) }}";
+    </script>
+    <script>
+        function downloadCDF(courseId, format) {
+            window.location.href = `/lecturer/course/${courseId}/download-cdf?format=${format}`;
+        }
     </script>
 @endsection
 

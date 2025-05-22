@@ -28,7 +28,7 @@
             <select class="form-control" name="semester" id="semester" required>
                 <option value="">-- Select Semester --</option>
                 @for ($i = 1; $i <= 8; $i++)
-                    <option value="{{ $i }}">Semester {{ $i }}</option> <!-- Store only number -->
+                    <option value="{{ $i }}">Semester {{ $i }}</option>
                 @endfor
             </select>
         </div>
@@ -52,16 +52,25 @@
                 <option value="B">B</option>
             </select>
         </div>
+
         <div class="form-group">
-            <label for="code">Credit Hours:</label>
-            <input type="text" class="form-control" name="Credit_Hours" id="Credit_Hours" required>
-        </div>
-        <div class="form-group">
-            <label for="code">Status:</label>
-            <input type="text" class="form-control" name="Status" id="Status" required>
+            <label for="credit_hours">Credit Hours:</label>
+            <input type="number" class="form-control" name="credit_hours" id="credit_hours" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Create Course</button>
+        <div class="form-group">
+            <label for="theory_hours">Theory Hours:</label>
+            <input type="number" class="form-control" name="theory_hours" id="theory_hours" required>
+        </div>
+
+        <div class="form-group">
+            <label for="lab_hours">Lab Hours:</label>
+            <input type="number" class="form-control" name="lab_hours" id="lab_hours" required>
+        </div>
+
+        <div class="text-end mt-4">
+            <button type="submit" class="btn btn-success">Create Course</button>
+        </div>
     </form>
 </div>
 @endsection
