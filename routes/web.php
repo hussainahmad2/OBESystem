@@ -140,7 +140,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
         Route::get('/add-student-lab-marks/{id}', [CourseAllocationController::class, 'add_studentlab_marks'])->name('studentlab.add_marks');
         Route::Post('/store-student-marks', [CourseAllocationController::class, 'store_student_marks'])->name('student.store_marks');
         Route::Post('/store-student-marks-lab', [CourseAllocationController::class, 'store_student_marks_lab'])->name('student_lab.store_marks');
-        Route::delete('/delete-student-marks/{id}', [CourseAllocationController::class, 'delete_student_marks'])->name('student.delete_marks');
+        Route::delete('/student-marks/delete/{id}', [\App\Http\Controllers\Faculty\CourseController::class, 'delete_student_marks'])->name('delete_student_marks');
 
         //session
         Route::get('/set-course/{course_id}', [App\Http\Controllers\Faculty\CourseController::class, 'setCourseSession'])->name('courses.setCourseSession');

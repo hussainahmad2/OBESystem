@@ -249,6 +249,27 @@
                 font-size: 1.5rem;
             }
         }
+
+        .assessment-header form,
+        .assessment-header button {
+            background: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .assessment-header i.fas.fa-trash-alt {
+            font-size: 1.3rem;
+            color: #dc3545;
+        }
+        .assessment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .assessment-header form {
+            margin-left: auto;
+        }
     </style>
 </head>
 
@@ -371,13 +392,20 @@
 
                     @forelse($marksDetail as $index => $assessment)
                     <div class="assessment-card">
-                        <div class="assessment-header">
-                            <h5 class="assessment-title">
+                        <div class="assessment-header d-flex align-items-center" style="position: relative;">
+                            <div style="flex: 1;">
                                 <i class="fas fa-file-alt mr-2"></i>
                                 {{ $assessment->assessment_title ?? 'Untitled Assessment' }}
                                 <span class="badge badge-light ml-2">{{ $assessment->type }}</span>
-                            </h5>
                             </div>
+                            <form action="{{ route('delete_student_marks', $assessment->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this assessment?');" style="margin:0;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" style="background: none; border: none; padding: 0; margin: 0; cursor: pointer;">
+                                    <i class="fas fa-trash-alt text-danger" style="font-size: 1.3rem;"></i>
+                                </button>
+                            </form>
+                        </div>
                         
                         <div class="assessment-content">
                             <table class="marks-table">
@@ -426,6 +454,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                     @empty
                     <div class="no-marks">
                         <i class="fas fa-clipboard-list"></i>

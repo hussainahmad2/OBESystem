@@ -262,4 +262,11 @@ class CourseController extends Controller
         session(['course_id' => $course_id]);
         return redirect()->back();
     }
+
+    public function delete_student_marks($id)
+    {
+        $assessment = \App\Models\assessment::findOrFail($id);
+        $assessment->delete();
+        return back()->with('success', 'Assessment deleted successfully.');
+    }
 }
